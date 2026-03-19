@@ -1,0 +1,13 @@
+.wrapper {
+    
+    text-align: center;
+}
+
+@keyframes colorChange {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: yellow;
+  }
+}

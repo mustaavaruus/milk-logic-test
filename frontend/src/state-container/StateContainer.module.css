@@ -1,0 +1,24 @@
+.wrapper {
+    text-align: center;
+}
+
+.stateTextWrapper {
+    text-align: center;
+}
+
+.stateVisualWrapper {
+    margin: 0 auto;
+    font-weight: 700;
+}
+
+.stateVisualWrapperColorGreen {
+    color: #bdf525;
+}
+
+.stateVisualWrapperColorYellow {
+    color: rgb(250, 204, 0);
+}
+
+.stateVisualWrapperColorRed {
+    color: rgb(243, 51, 3);
+}

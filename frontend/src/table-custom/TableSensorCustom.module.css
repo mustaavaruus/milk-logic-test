@@ -1,0 +1,12 @@
+.tableWrapper {
+    text-align: center;
+}
+
+.tableCell {
+    border: 1px solid rgba(44, 44, 44, 0.3);
+    border-collapse: collapse;
+}
+
+.graphCell {
+    width: 320px;
+}

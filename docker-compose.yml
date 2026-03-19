@@ -1,0 +1,50 @@
+services:
+        postgres-db:
+                container_name: milk-logic-database
+                build:
+                        context: ./database
+                        dockerfile: ./Dockerfile
+                restart: always
+                ports:
+                        - "6543:5432"
+                volumes:
+                        - postgres_data:/var/lib/postgresql/data
+                networks:
+                        - fullstack-network
+
+        backend:
+                container_name: milk-logic-backend-app
+                build:
+                        context: ./backend
+                        dockerfile: ./Dockerfile
+                ports:
+                        - "5100:5100"
+                environment:
+                        ConnectionStrings__DefaultConnection: "Server=localhost;Database=milk_logic_test_db;Username=postgres;Password=1234;"
+                        ASPNETCORE_ENVIRONMENT: Development
+                depends_on:
+                        - postgres-db
+                networks:
+                        - fullstack-network
+                extra_hosts:
+                        - "host.docker.internal:host-gateway"
+
+        frontend:
+                container_name: milk-logic-frontend-app
+                build:
+                        context: ./frontend
+                        dockerfile: ./Dockerfile
+                ports:
+                        - "3000:3000"
+                depends_on:
+                        - backend
+                networks:
+                        - fullstack-network
+
+volumes:
+        postgres_data:
+
+
+networks:
+        fullstack-network:
+                driver: bridge
