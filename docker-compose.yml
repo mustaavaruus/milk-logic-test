@@ -20,7 +20,7 @@ services:
                 ports:
                         - "5100:5100"
                 environment:
-                        ConnectionStrings__DefaultConnection: "Server=localhost;Database=milk_logic_test_db;Username=postgres;Password=1234;"
+                        ConnectionStrings__DefaultConnection: "Server=host.docker.internal;Database=milk_logic_test_db;Username=postgres;Password=1234;"
                         ASPNETCORE_ENVIRONMENT: Development
                 depends_on:
                         - postgres-db
