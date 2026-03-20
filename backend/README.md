@@ -5,7 +5,7 @@
 ## 🚀 Быстрый запуск
 1. Установите .NET SDK 8.0/9.0.
 2. Установить PostrgeSQL
-3. Выполнить SQL-скрипт (ю/database/init.sql)
+3. Выполнить SQL-скрипт (папка database/init.sql)
 4. Клонируйте репозиторий. https://github.com/mustaavaruus/milk-logic-test  (https://github.com/mustaavaruus/milk-logic-test.git)
 5. Перейдите в папку backend
 6. Выполните команду `dotnet build`
