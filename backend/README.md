@@ -4,7 +4,7 @@
 
 ## 🚀 Быстрый запуск
 1. Установите .NET SDK 8.0/9.0.
-2. Клонируйте репозиторий. https://github.com/mustaavaruus/milk-logic-test
+2. Клонируйте репозиторий. https://github.com/mustaavaruus/milk-logic-test  (https://github.com/mustaavaruus/milk-logic-test.git)
 3. Перейдите в папку backend
 3. Выполните команду `dotnet build`
 4. Выполните команду `dotnet run`.

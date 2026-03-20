@@ -31,8 +31,7 @@
 1.  **Клонируйте репозиторий:**
     ```bash
     git clone https://github.com/mustaavaruus/milk-logic-test
-    cd название-проекта
-    cd frontend
+    перейдите в папку frontend
     ```
 
 2.  **Установите зависимости:**
