@@ -1,12 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import MainContainer from './main-container/MainContainer';
+import MainContainer from './components/main-container/MainContainer';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <div className="App">
       <div>
+        <ToastContainer />
         <MainContainer  />
       </div>
     </div>

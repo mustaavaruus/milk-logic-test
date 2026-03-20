@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.css";
 import styles from './TableSensorCustom.module.css';
 import SparklineSensorChart from '../sparklines-custom/SparklineCustom';
-import { RowModel } from '../models/row-model';
-import { RowContainer } from '../models/row-container';
+import { RowModel } from '../../models/row-model';
+import { RowContainer } from '../../models/row-container';
 import StateContainer from '../state-container/StateContainer';
-import { StateEnum } from '../enums/state-enum';
-import DateFormatService from '../services/date-format-service';
+import { StateEnum } from '../../enums/state-enum';
+import DateFormatService from '../../services/date-format-service';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/esm/Table';
 import { Form } from "react-bootstrap";
@@ -32,7 +32,7 @@ const TableSensorCustom: React.FC<RowContainer> = (data: RowContainer) => {
                     <tr>
                         <th style={{ width: '12%' }}># Sensor</th>
                         <th style={{ width: '12%' }}>Последнее значение</th>
-                        <th style={{ width: '18%' }}>Тренд (последние 60 сек)</th>
+                        <th style={{ width: '18%' }}>Тренд</th>
                         <th style={{ width: '12%' }}>Max</th>
                         <th style={{ width: '12%' }}>Min</th>
                         <th style={{ width: '12%' }}>Avg</th>

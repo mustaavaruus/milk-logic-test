@@ -12,4 +12,5 @@ RUN dotnet publish -o out
 FROM mcr.microsoft.com/dotnet/sdk:10.0
 WORKDIR /App
 COPY --from=build /App/out .
+EXPOSE 5100
 ENTRYPOINT ["dotnet", "WebApplication1.dll"]

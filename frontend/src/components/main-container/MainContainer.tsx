@@ -1,22 +1,26 @@
 import styles from './MainContainer.module.css';
-import { StateEnum } from "../enums/state-enum";
+import { StateEnum } from "../../enums/state-enum";
 import TableSensorCustom from "../table-custom/TableSensorCustom";
-import { RowModel } from "../models/row-model";
+import { RowModel } from "../../models/row-model";
 import { useEffect, useRef, useState } from "react";
-import SensorDataService from "../services/sensor-data-service";
+import SensorDataService from "../../services/sensor-data-service";
 import { RowData } from "@tanstack/react-table";
-import { SensorData } from "../models/sensor-data";
-import DateFormatService from "../services/date-format-service";
-import { SummaryModel } from "../models/summary-model";
-import MainProcessingService from '../services/main-processing-service';
+import { SensorData } from "../../models/sensor-data";
+import DateFormatService from "../../services/date-format-service";
+import { SummaryModel } from "../../models/summary-model";
+import MainProcessingService from '../../services/main-processing-service';
 import TableControlCustom from '../table-custom/table-controls-custom/TableControlCustom';
 import ConnectionState from '../connection-state/ConnectionState';
-import { ConnectionEnum } from '../enums/connection-enum';
+import { ConnectionEnum } from '../../enums/connection-enum';
+import { toast } from 'react-toastify';
+import XmlUploader from '../xml-uploader/XmlUploader';
+import NotifyService from '../../services/notify-service';
 
 const MainContainer = () => {
 
   const timeInterval = 5000;
   const periodInSeconds = 60; // данные датчика за последние 60 секунд
+  const connectionsAttemptMax = 3;
 
   const [counter, setCounter] = useState<number>(0);
 
@@ -26,11 +30,16 @@ const MainContainer = () => {
   let [periodEnd, setPeriodEnd] = useState<Date | null | undefined>(new Date);
 
   let [isLive, setIsLive] = useState<boolean>(true);
+  let [isOffline, setIsOffline] = useState<boolean>(false);
 
   let [connectionState, setConnectionState] = useState<ConnectionEnum>(ConnectionEnum.Online);
   let [connectionAttempts, setConnectionAttempts] = useState<number>(0);
 
   const loadSensorData = async () => {
+
+    if (isOffline == true) {
+      return;
+    }
 
     await SensorDataService
       .getDataByPeriod(periodBegin, periodEnd).then(async (sensorData) => {
@@ -45,16 +54,29 @@ const MainContainer = () => {
         setConnectionState(ConnectionEnum.Online);
         setConnectionAttempts(0);
       },
-      (err) => {
-        console.error("ERRRORRS!");
-        console.error(err);
-        setConnectionAttempts(connectionAttempts + 1);
-        if (connectionAttempts <= 3) {
-          setConnectionState(ConnectionEnum.Reconnecting);
-        } else {
-          setConnectionState(ConnectionEnum.Offline);
-        }
-      });
+        (error) => {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            NotifyService.notifyError(`Произошла ошибка: статус: ${error.response.data}, текст: ${error.response.data}`);
+          } else if (error.request) {
+            console.log(error.request);
+            setConnectionAttempts(connectionAttempts + 1);
+            if (connectionAttempts < connectionsAttemptMax) {
+              setConnectionState(ConnectionEnum.Reconnecting);
+            } else {
+              setConnectionState(ConnectionEnum.Offline);
+              setIsOffline(true);
+              NotifyService.notifyError("Произошла ошибка: данные больше не обновляются");
+            }
+          } else {
+            console.error('Error', error.message);
+            NotifyService.notifyError(`Произошла ошибка: ${error.message}}`);
+          }
+          console.error(error);
+
+        });
   }
 
   const updatePeriods = (): void => {
@@ -87,6 +109,7 @@ const MainContainer = () => {
     if (!isLive) {
       return;
     }
+
     loadSensorData();
   },
     [isLive]);
@@ -109,7 +132,11 @@ const MainContainer = () => {
         </div>
         <br />
         {
-          isLive ? <ConnectionState state={connectionState} /> : <div>Вы находитесь в режиме оффлайн</div>
+          isLive ? <ConnectionState 
+                      state={connectionState} 
+                      attempts={connectionAttempts} 
+                      attemptsMax={connectionsAttemptMax} /> 
+                : <div>Вы находитесь в режиме оффлайн</div>
         }
       </div>
       <br />
@@ -122,6 +149,10 @@ const MainContainer = () => {
           onIsLiveChange={setIsLive}
         />
         <TableSensorCustom data={data} />
+
+      </div>
+      <div className={styles.uloaderWrapper}>
+        <XmlUploader />
       </div>
 
     </div>

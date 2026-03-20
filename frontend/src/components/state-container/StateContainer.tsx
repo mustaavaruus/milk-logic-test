@@ -1,6 +1,6 @@
 import styles from './StateContainer.module.css';
-import { StateContainerPropsModel } from "../models/state-container-props-model";
-import { StateEnum } from '../enums/state-enum';
+import { StateContainerPropsModel } from "./../../models/state-container-props-model";
+import { StateEnum } from './../../enums/state-enum';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faClose, faUniversalAccess, faWarning } from '@fortawesome/free-solid-svg-icons';
 

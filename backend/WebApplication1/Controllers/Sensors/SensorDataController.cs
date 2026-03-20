@@ -110,7 +110,7 @@ namespace WebApplication1.Controllers.Sensors
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/validate-xml-data")]
+        [Route("validate-xml-data")]
         [Consumes("application/xml")]
         [ProducesResponseType(typeof(UploadDataResponseContractModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

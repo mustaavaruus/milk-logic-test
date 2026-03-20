@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from './TableCellCustom.module.css';
-import { TableCellPropsModel } from "../../models/table-cell-props-model";
+import { TableCellPropsModel } from "../../../models/table-cell-props-model";
 import { motion } from "framer-motion";
 
 
