@@ -4,11 +4,13 @@
 
 ## 🚀 Быстрый запуск
 1. Установите .NET SDK 8.0/9.0.
-2. Клонируйте репозиторий. https://github.com/mustaavaruus/milk-logic-test  (https://github.com/mustaavaruus/milk-logic-test.git)
-3. Перейдите в папку backend
-3. Выполните команду `dotnet build`
-4. Выполните команду `dotnet run`.
-5. Перейдите по адресу `https://localhost:5100/swagger` для просмотра документации.
+2. Установить PostrgeSQL
+3. Выполнить SQL-скрипт (ю/database/init.sql)
+4. Клонируйте репозиторий. https://github.com/mustaavaruus/milk-logic-test  (https://github.com/mustaavaruus/milk-logic-test.git)
+5. Перейдите в папку backend
+6. Выполните команду `dotnet build`
+7. Выполните команду `dotnet run`.
+8. Перейдите по адресу `https://localhost:5100/swagger` для просмотра документации.
 
 ## 🛠 Технологии
 - ASP.NET Core Web API
