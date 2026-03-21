@@ -24,14 +24,15 @@ services:
                         ASPNETCORE_ENVIRONMENT: Development
                 depends_on:
                         - postgres-db
-                networks:
-                        - fullstack-network
+                network_mode: "host"
                 extra_hosts:
                         - "host.docker.internal:host-gateway"
 
         frontend:
                 container_name: milk-logic-frontend-app
                 build:
+                        args:
+                                - REACT_APP_API_BASE_URL=http://127.0.0.1:5100
                         context: ./frontend
                         dockerfile: ./Dockerfile
                 ports:

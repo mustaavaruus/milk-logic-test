@@ -6,7 +6,7 @@ import { Card, Container, Form } from 'react-bootstrap';
 
 const XmlValidator: React.FC = () => {
 
-    const baseUrl = 'http://localhost:5100';
+    const baseUrl = process.env.REACT_APP_API_BASE_URL; // TODO: env
 
     const [file, setFile] = useState<File | null>(null);
     const [status, setStatus] = useState<string>('');

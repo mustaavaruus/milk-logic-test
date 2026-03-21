@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SensorData } from '../models/sensor-data';
 import { SummaryModel } from '../models/summary-model';
 
-const BASE_URL = 'http://localhost:5100'; // TODO в ENV
+const BASE_URL = process.env.REACT_APP_API_BASE_URL; //'http://127.0.0.1:5100';
 
 const SensorDataService = {
     
