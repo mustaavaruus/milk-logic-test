@@ -38,9 +38,7 @@ builder.Services.AddSwaggerGen(
 });*/
 builder.Services.AddCors(options => options.AddPolicy(
      "AllowAll",
-     p => p.WithOrigins("http://localhost:3000")
-     .WithOrigins("http://host.docker.internal")
-     .AllowAnyOrigin()
+     p => p.AllowAnyOrigin()
      .AllowAnyMethod()
      .AllowAnyHeader()));
 
